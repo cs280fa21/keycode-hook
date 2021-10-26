@@ -4,27 +4,21 @@ import Header from "./components/Header";
 import Card from "./components/Card";
 
 function App() {
-  const [state, setState] = useState({
-    key: "",
-    location: "",
-    which: "",
-    code: "",
-  });
+  const [key, setKey] = useState("");
+  const [location, setLocation] = useState("");
+  const [which, setWhich] = useState("");
+  const [code, setCode] = useState("");
 
   useEffect(() => {
     document.body.addEventListener("keydown", onKeyDown);
   }, []);
 
   const onKeyDown = (event) => {
-    setState({
-      key: event.key,
-      location: event.location,
-      which: event.which,
-      code: event.code,
-    });
+    setKey(event.key);
+    setLocation(event.location);
+    setWhich(event.which);
+    setCode(event.code);
   };
-
-  const { key, location, which, code } = state;
 
   return (
     <Container className="p-3">
