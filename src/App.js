@@ -1,25 +1,22 @@
-import { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
 import Header from "./components/Header";
 import Card from "./components/Card";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      key: "",
-      location: "",
-      which: "",
-      code: "",
-    };
-  }
+function App() {
+  const [state, setState] = useState({
+    key: "",
+    location: "",
+    which: "",
+    code: "",
+  });
 
-  componentDidMount = () => {
-    document.body.addEventListener("keydown", this.onKeyDown);
-  };
+  useEffect(() => {
+    document.body.addEventListener("keydown", onKeyDown);
+  }, []);
 
-  onKeyDown = (event) => {
-    this.setState({
+  const onKeyDown = (event) => {
+    setState({
       key: event.key,
       location: event.location,
       which: event.which,
@@ -27,20 +24,19 @@ class App extends Component {
     });
   };
 
-  render() {
-    const { key, location, which, code } = this.state;
-    return (
-      <Container className="p-3">
-        <Header />
-        <Row>
-          <Card title={"event.key"} value={key} />
-          <Card title={"event.location"} value={location} />
-          <Card title={"event.which"} value={which} />
-          <Card title={"event.code"} value={code} />
-        </Row>
-      </Container>
-    );
-  }
+  const { key, location, which, code } = state;
+
+  return (
+    <Container className="p-3">
+      <Header />
+      <Row>
+        <Card title={"event.key"} value={key} />
+        <Card title={"event.location"} value={location} />
+        <Card title={"event.which"} value={which} />
+        <Card title={"event.code"} value={code} />
+      </Row>
+    </Container>
+  );
 }
 
 export default App;
